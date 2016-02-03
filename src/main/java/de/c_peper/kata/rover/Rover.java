@@ -1,15 +1,74 @@
 package de.c_peper.kata.rover;
 
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
-/**
- * Created by trublu on 03/02/16.
- */
-@NoArgsConstructor
+@Data
 public class Rover {
 
+    private Integer x;
 
-    public static String getPositionString() {
-        return "0,0,N";
+    private Integer y;
+
+    private Direction direction;
+
+    public Rover() {
+        x = 0;
+        y = 0;
+        direction = Direction.N;
+    }
+
+    public String getPositionString() {
+        return x + "," + y + "," + direction.toString();
+    }
+
+    public void processInput(char input) {
+        switch (input) {
+            case 'R':
+                turnRight();
+                break;
+            case 'L':
+                turnLeft();
+                break;
+            case 'F':
+                x++;
+        }
+    }
+
+    private void turnRight() {
+        switch (direction) {
+            case N:
+                direction = Direction.E;
+                break;
+            case E:
+                direction = Direction.S;
+                break;
+            case S:
+                direction = Direction.W;
+                break;
+            case W:
+                direction = Direction.N;
+        }
+    }
+
+    private void turnLeft() {
+        switch (direction) {
+            case N:
+                direction = Direction.W;
+                break;
+            case W:
+                direction = Direction.S;
+                break;
+            case S:
+                direction = Direction.E;
+                break;
+            case E:
+                direction = Direction.N;
+        }
+    }
+
+    public void processInput(String inputString) {
+        for (char inputChar : inputString.toCharArray()) {
+            processInput(inputChar);
+        }
     }
 }
