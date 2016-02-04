@@ -111,4 +111,31 @@ public class RoverTest {
 
         Assert.assertTrue(rover.getPositionString().equals("1,0,N"));
     }
+
+    @Test
+    public void testMoveBackward() throws Exception {
+        Rover rover = new Rover();
+
+        rover.processInput('B');
+
+        Assert.assertTrue(rover.getPositionString().equals("9,0,N"));
+    }
+
+    @Test
+    public void testMoveForwardThanBackward() throws Exception {
+        Rover rover = new Rover();
+
+        rover.processInput("FB");
+
+        Assert.assertTrue(rover.getPositionString().equals("0,0,N"));
+    }
+
+    @Test
+    public void testMoveBackwardThanForward() throws Exception {
+        Rover rover = new Rover();
+
+        rover.processInput("BF");
+
+        Assert.assertTrue(rover.getPositionString().equals("0,0,N"));
+    }
 }

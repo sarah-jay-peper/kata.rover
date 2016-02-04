@@ -31,6 +31,14 @@ public class Rover {
                 break;
             case 'F':
                 x++;
+                if (x == 10) {
+                    x = 0;
+                }
+                break;
+            case 'B':
+                x--;
+                if (x < 0)
+                    x = 9;
         }
     }
 
