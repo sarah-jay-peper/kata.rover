@@ -109,7 +109,7 @@ public class RoverTest {
 
         rover.processInput('F');
 
-        Assert.assertTrue(rover.getPositionString().equals("1,0,N"));
+        Assert.assertTrue(rover.getPositionString().equals("0,1,N"));
     }
 
     @Test
@@ -118,7 +118,7 @@ public class RoverTest {
 
         rover.processInput('B');
 
-        Assert.assertTrue(rover.getPositionString().equals("9,0,N"));
+        Assert.assertTrue(rover.getPositionString().equals("0,9,N"));
     }
 
     @Test

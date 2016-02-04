@@ -30,15 +30,15 @@ public class Rover {
                 turnLeft();
                 break;
             case 'F':
-                x++;
-                if (x == 10) {
-                    x = 0;
+                y++;
+                if (y == 10) {
+                    y = 0;
                 }
                 break;
             case 'B':
-                x--;
-                if (x < 0)
-                    x = 9;
+                y--;
+                if (y < 0)
+                    y = 9;
         }
     }
 
