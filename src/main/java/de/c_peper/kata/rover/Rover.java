@@ -2,10 +2,19 @@ package de.c_peper.kata.rover;
 
 import lombok.Data;
 
+/**
+ * X = 0..9 W <-> E
+ * Y = 0..9 S <-> N
+ * direction = N,E,S,W
+ * R: N->E->S->W->N
+ * L: N->W->S->E->N
+ */
 @Data
 public class Rover {
 
     public static final int MAX_Y = 10;
+
+    public static final int MAX_X = 10;
 
     private Integer x;
 
@@ -41,13 +50,25 @@ public class Rover {
                         break;
                     case E:
                         x++;
+                        if (x == MAX_X) {
+                            x = 0;
+                        }
                         break;
                     case S:
                         moveSouth();
                 }
                 break;
             case 'B':
-                moveSouth();
+                switch (direction) {
+                    case N:
+                        moveSouth();
+                        break;
+                    case E:
+                        x--;
+                        if (x < 0) {
+                            x = MAX_X - 1;
+                        }
+                }
         }
     }
 

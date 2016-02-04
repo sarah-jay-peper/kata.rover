@@ -166,4 +166,31 @@ public class RoverTest {
 
         assertEquals("0,8,S", rover.getPositionString());
     }
+
+    @Test
+    public void testTurnRightThanMoveBackward() throws Exception {
+        Rover rover = new Rover();
+
+        rover.processInput("RB");
+
+        assertEquals(rover.getPositionString(), "9,0,E");
+    }
+
+    @Test
+    public void testTurnRightThanMoveTwiceBackward() throws Exception {
+        Rover rover = new Rover();
+
+        rover.processInput("RBB");
+
+        assertEquals(rover.getPositionString(), "8,0,E");
+    }
+
+    @Test
+    public void testTurnRightThanMoveTwiceBackwardAndTwiceForward() throws Exception {
+        Rover rover = new Rover();
+
+        rover.processInput("RBBFF");
+
+        assertEquals(rover.getPositionString(), "0,0,E");
+    }
 }
