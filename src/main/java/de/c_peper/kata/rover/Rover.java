@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class Rover {
 
+    public static final int MAX_Y = 10;
+
     private Integer x;
 
     private Integer y;
@@ -30,15 +32,29 @@ public class Rover {
                 turnLeft();
                 break;
             case 'F':
-                y++;
-                if (y == 10) {
-                    y = 0;
+                switch (direction) {
+                    case N:
+                        y++;
+                        if (y == MAX_Y) {
+                            y = 0;
+                        }
+                        break;
+                    case E:
+                        x++;
+                        break;
+                    case S:
+                        moveSouth();
                 }
                 break;
             case 'B':
-                y--;
-                if (y < 0)
-                    y = 9;
+                moveSouth();
+        }
+    }
+
+    private void moveSouth() {
+        y--;
+        if (y < 0) {
+            y = MAX_Y - 1;
         }
     }
 

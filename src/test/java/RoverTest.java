@@ -1,13 +1,14 @@
 import de.c_peper.kata.rover.Rover;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class RoverTest {
 
     @Test
     public void testGetInitialPosition() throws Exception {
         Rover rover = new Rover();
-        Assert.assertTrue(rover.getPositionString().equals("0,0,N"));
+        assertEquals(("0,0,N"), rover.getPositionString());
     }
 
     @Test
@@ -16,7 +17,7 @@ public class RoverTest {
 
         rover.processInput('R');
 
-        Assert.assertTrue(rover.getPositionString().equals("0,0,E"));
+        assertEquals(rover.getPositionString(), ("0,0,E"));
     }
 
     @Test
@@ -26,7 +27,7 @@ public class RoverTest {
         rover.processInput('R');
         rover.processInput('R');
 
-        Assert.assertTrue(rover.getPositionString().equals("0,0,S"));
+        assertEquals(rover.getPositionString(), ("0,0,S"));
     }
 
     @Test
@@ -37,7 +38,7 @@ public class RoverTest {
         rover.processInput('R');
         rover.processInput('R');
 
-        Assert.assertTrue(rover.getPositionString().equals("0,0,W"));
+        assertEquals(rover.getPositionString(), ("0,0,W"));
     }
 
     @Test
@@ -49,7 +50,7 @@ public class RoverTest {
         rover.processInput('R');
         rover.processInput('R');
 
-        Assert.assertTrue(rover.getPositionString().equals("0,0,N"));
+        assertEquals(rover.getPositionString(), ("0,0,N"));
     }
 
     @Test
@@ -58,7 +59,7 @@ public class RoverTest {
 
         rover.processInput('L');
 
-        Assert.assertTrue(rover.getPositionString().equals("0,0,W"));
+        assertEquals(rover.getPositionString(), ("0,0,W"));
     }
 
     @Test
@@ -68,7 +69,7 @@ public class RoverTest {
         rover.processInput('L');
         rover.processInput('L');
 
-        Assert.assertTrue(rover.getPositionString().equals("0,0,S"));
+        assertEquals(rover.getPositionString(), ("0,0,S"));
     }
 
     @Test
@@ -79,7 +80,7 @@ public class RoverTest {
         rover.processInput('L');
         rover.processInput('L');
 
-        Assert.assertTrue(rover.getPositionString().equals("0,0,E"));
+        assertEquals(rover.getPositionString(), ("0,0,E"));
     }
 
     @Test
@@ -91,7 +92,7 @@ public class RoverTest {
         rover.processInput('L');
         rover.processInput('L');
 
-        Assert.assertTrue(rover.getPositionString().equals("0,0,N"));
+        assertEquals(rover.getPositionString(), ("0,0,N"));
     }
 
     @Test
@@ -100,7 +101,7 @@ public class RoverTest {
 
         rover.processInput("RRR");
 
-        Assert.assertTrue(rover.getPositionString().equals("0,0,W"));
+        assertEquals(rover.getPositionString(), ("0,0,W"));
     }
 
     @Test
@@ -109,7 +110,7 @@ public class RoverTest {
 
         rover.processInput('F');
 
-        Assert.assertTrue(rover.getPositionString().equals("0,1,N"));
+        assertEquals(rover.getPositionString(), ("0,1,N"));
     }
 
     @Test
@@ -118,7 +119,7 @@ public class RoverTest {
 
         rover.processInput('B');
 
-        Assert.assertTrue(rover.getPositionString().equals("0,9,N"));
+        assertEquals(rover.getPositionString(), ("0,9,N"));
     }
 
     @Test
@@ -127,7 +128,7 @@ public class RoverTest {
 
         rover.processInput("FB");
 
-        Assert.assertTrue(rover.getPositionString().equals("0,0,N"));
+        assertEquals(rover.getPositionString(), ("0,0,N"));
     }
 
     @Test
@@ -136,6 +137,33 @@ public class RoverTest {
 
         rover.processInput("BF");
 
-        Assert.assertTrue(rover.getPositionString().equals("0,0,N"));
+        assertEquals(rover.getPositionString(), ("0,0,N"));
+    }
+
+    @Test
+    public void testTurnRightThanMoveForward() throws Exception {
+        Rover rover = new Rover();
+
+        rover.processInput("RF");
+
+        assertEquals(rover.getPositionString(), "1,0,E");
+    }
+
+    @Test
+    public void testTurnRightRightThanMoveForward() throws Exception {
+        Rover rover = new Rover();
+
+        rover.processInput("RRF");
+
+        assertEquals("0,9,S", rover.getPositionString());
+    }
+
+    @Test
+    public void testTurnRightRightThanMoveTwiceForward() throws Exception {
+        Rover rover = new Rover();
+
+        rover.processInput("RRFF");
+
+        assertEquals("0,8,S", rover.getPositionString());
     }
 }
