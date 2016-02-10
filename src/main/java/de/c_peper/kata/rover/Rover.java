@@ -41,35 +41,43 @@ public class Rover {
                 turnLeft();
                 break;
             case 'F':
-                switch (direction) {
-                    case N:
-                        moveNorth();
-                        break;
-                    case E:
-                        moveEast();
-                        break;
-                    case S:
-                        moveSouth();
-                        break;
-                    case W:
-                        moveWest();
-                        break;
-                }
+                moveForward();
                 break;
             case 'B':
-                switch (direction) {
-                    case N:
-                        moveSouth();
-                        break;
-                    case E:
-                        moveWest();
-                        break;
-                    case W:
-                        moveEast();
-                        break;
-                    case S:
-                        moveNorth();
-                }
+                moveBackward();
+        }
+    }
+
+    private void moveBackward() {
+        switch (direction) {
+            case N:
+                moveSouth();
+                break;
+            case E:
+                moveWest();
+                break;
+            case W:
+                moveEast();
+                break;
+            case S:
+                moveNorth();
+        }
+    }
+
+    private void moveForward() {
+        switch (direction) {
+            case N:
+                moveNorth();
+                break;
+            case E:
+                moveEast();
+                break;
+            case S:
+                moveSouth();
+                break;
+            case W:
+                moveWest();
+                break;
         }
     }
 
