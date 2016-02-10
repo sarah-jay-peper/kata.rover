@@ -22,6 +22,8 @@ public class Rover {
 
     private Direction direction;
 
+    private Integer obstaclePosY;
+
     public Rover() {
         x = 0;
         y = 0;
@@ -86,6 +88,9 @@ public class Rover {
         if (y == MAX_Y) {
             y = 0;
         }
+        if (y.equals(obstaclePosY)) {
+            moveSouth();
+        }
     }
 
     private void moveWest() {
@@ -145,5 +150,9 @@ public class Rover {
         for (char inputChar : inputString.toCharArray()) {
             processInput(inputChar);
         }
+    }
+
+    public void addObstacle(Integer positionX, Integer positionY) {
+        this.obstaclePosY = positionY;
     }
 }

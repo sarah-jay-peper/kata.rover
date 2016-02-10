@@ -72,4 +72,23 @@ class RoverSpec extends Specification {
         "RRFFFFFFFFFF" | "0,0,S" | "face south, move forward ten times"
         "RRBBBBBBBBBB" | "0,0,S" | "face south, move backward ten times"
     }
+
+    @Unroll
+    def "obstacle avoidance: #testName"() {
+        given: "new Rover"
+        def rover = new Rover()
+
+        and: "obstacle"
+        rover.addObstacle(obsX, obsY);
+
+        when: "movement input"
+        rover.processInput(input)
+
+        then: "expect result"
+        rover.getPositionString() == result
+
+        where:
+        input | result  | obsX | obsY | testName
+        "FF"  | "0,1,N" | 0    | 2    | "obstacle at 0/2"
+    }
 }
