@@ -49,13 +49,14 @@ public class Rover {
                         }
                         break;
                     case E:
-                        x++;
-                        if (x == MAX_X) {
-                            x = 0;
-                        }
+                        moveEast();
                         break;
                     case S:
                         moveSouth();
+                        break;
+                    case W:
+                        moveWest();
+                        break;
                 }
                 break;
             case 'B':
@@ -64,11 +65,25 @@ public class Rover {
                         moveSouth();
                         break;
                     case E:
-                        x--;
-                        if (x < 0) {
-                            x = MAX_X - 1;
-                        }
+                        moveWest();
+                        break;
+                    case W:
+                        moveEast();
                 }
+        }
+    }
+
+    private void moveWest() {
+        x--;
+        if (x < 0) {
+            x = MAX_X - 1;
+        }
+    }
+
+    private void moveEast() {
+        x++;
+        if (x == MAX_X) {
+            x = 0;
         }
     }
 
