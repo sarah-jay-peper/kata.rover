@@ -45,4 +45,31 @@ class RoverSpec extends Specification {
         "LFF"   | "8,0,W" | "turn left, move twice forward"
         "LFFBB" | "0,0,W" | "turn left, move twice forward, twice backward"
     }
+
+    @Unroll
+    def "north/south movement: #testName"() {
+        given: "new Rover"
+        def rover = new Rover()
+
+        when: "movement input"
+        rover.processInput(input)
+
+        then: "expect result"
+        rover.getPositionString() == result
+
+        where:
+        input          | result  | testName
+        "FF"           | "0,2,N" | "move twice forward"
+        "FFBB"         | "0,0,N" | "move twice forward, twice backward"
+        "BB"           | "0,8,N" | "move twice backward"
+        "BBFF"         | "0,0,N" | "move twice backward, twice forward"
+        "FFFFFFFFFF"   | "0,0,N" | "move forward ten times"
+        "BBBBBBBBBB"   | "0,0,N" | "move backward ten times"
+        "RRFF"         | "0,8,S" | "face south, move twice forward"
+        "RRFFBB"       | "0,0,S" | "face south, move twice forward, twice backward"
+        "RRBB"         | "0,2,S" | "face south, move twice backward"
+        "RRBBFF"       | "0,0,S" | "face south, move twice backward, twice forward"
+        "RRFFFFFFFFFF" | "0,0,S" | "face south, move forward ten times"
+        "RRBBBBBBBBBB" | "0,0,S" | "face south, move backward ten times"
+    }
 }

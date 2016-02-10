@@ -43,10 +43,7 @@ public class Rover {
             case 'F':
                 switch (direction) {
                     case N:
-                        y++;
-                        if (y == MAX_Y) {
-                            y = 0;
-                        }
+                        moveNorth();
                         break;
                     case E:
                         moveEast();
@@ -69,7 +66,17 @@ public class Rover {
                         break;
                     case W:
                         moveEast();
+                        break;
+                    case S:
+                        moveNorth();
                 }
+        }
+    }
+
+    private void moveNorth() {
+        y++;
+        if (y == MAX_Y) {
+            y = 0;
         }
     }
 
