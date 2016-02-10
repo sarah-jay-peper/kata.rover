@@ -1,3 +1,5 @@
+package de.c_peper.kata.rover.test;
+
 import de.c_peper.kata.rover.Rover;
 import org.junit.Test;
 
