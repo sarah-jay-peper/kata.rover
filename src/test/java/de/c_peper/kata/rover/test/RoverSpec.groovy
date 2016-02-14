@@ -96,4 +96,27 @@ class RoverSpec extends Specification {
         "BB"   | "0,9,N" | 0    | 8    | "obstacle at 0/8, driving backwards"
         "RRFF" | "0,9,S" | 0    | 8    | "obstacle at 0/8"
     }
+
+    @Unroll
+    def "obstacle avoidance, ignore extra movements: #testName"() {
+        given: "new Rover"
+        def rover = new Rover()
+
+        and: "obstacle"
+        rover.addObstacle(obsX, obsY);
+
+        when: "movement input"
+        rover.processInput(input)
+
+        then: "expect result"
+        rover.getPositionString() == result
+
+        where:
+        input    | result  | obsX | obsY | testName
+        "FFF"    | "0,1,N" | 0    | 2    | "obstacle at 0/2, keep going north"
+        "FFRF"   | "0,1,N" | 0    | 2    | "obstacle at 0/2, going east at obstacle"
+        "RFFRF"  | "1,0,E" | 2    | 0    | "obstacle at 2/0, going south at obstacle"
+        "LFFLF"  | "9,0,W" | 8    | 0    | "obstacle at 8/0, going west at obstacle"
+        "RRFFRF" | "0,9,S" | 0    | 8    | "obstacle at 0/8, going west at obstacle"
+    }
 }

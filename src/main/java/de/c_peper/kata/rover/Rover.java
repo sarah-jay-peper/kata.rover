@@ -1,7 +1,5 @@
 package de.c_peper.kata.rover;
 
-import lombok.Data;
-
 /**
  * X = 0..9 W <-> E
  * Y = 0..9 S <-> N
@@ -9,7 +7,6 @@ import lombok.Data;
  * R: N->E->S->W->N
  * L: N->W->S->E->N
  */
-@Data
 public class Rover {
 
     public static final int MAX_Y = 10;
@@ -25,6 +22,8 @@ public class Rover {
     private Integer obstaclePosY;
 
     private Integer obstaclePosX;
+
+    private Boolean continueMovement;
 
     public Rover() {
         x = 0;
@@ -91,6 +90,7 @@ public class Rover {
             y = 0;
         }
         if (y.equals(obstaclePosY)) {
+            continueMovement = Boolean.FALSE;
             moveSouth();
         }
     }
@@ -101,6 +101,7 @@ public class Rover {
             x = MAX_X - 1;
         }
         if (x.equals(obstaclePosX)) {
+            continueMovement = Boolean.FALSE;
             moveEast();
         }
     }
@@ -111,6 +112,7 @@ public class Rover {
             x = 0;
         }
         if (x.equals(obstaclePosX)) {
+            continueMovement = Boolean.FALSE;
             moveWest();
         }
     }
@@ -121,6 +123,7 @@ public class Rover {
             y = MAX_Y - 1;
         }
         if (y.equals(obstaclePosY)) {
+            continueMovement = Boolean.FALSE;
             moveNorth();
         }
     }
@@ -158,8 +161,12 @@ public class Rover {
     }
 
     public void processInput(String inputString) {
+        continueMovement = Boolean.TRUE;
         for (char inputChar : inputString.toCharArray()) {
             processInput(inputChar);
+            if (!continueMovement) {
+                break;
+            }
         }
     }
 
