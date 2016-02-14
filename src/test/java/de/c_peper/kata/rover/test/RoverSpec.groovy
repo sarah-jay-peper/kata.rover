@@ -90,5 +90,6 @@ class RoverSpec extends Specification {
         where:
         input | result  | obsX | obsY | testName
         "FF"  | "0,1,N" | 0    | 2    | "obstacle at 0/2"
+        "RFF" | "1,0,E" | 2    | 0    | "obstacle at 2/0"
     }
 }

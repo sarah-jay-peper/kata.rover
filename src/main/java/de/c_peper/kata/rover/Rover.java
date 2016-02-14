@@ -24,6 +24,8 @@ public class Rover {
 
     private Integer obstaclePosY;
 
+    private Integer obstaclePosX;
+
     public Rover() {
         x = 0;
         y = 0;
@@ -105,6 +107,9 @@ public class Rover {
         if (x == MAX_X) {
             x = 0;
         }
+        if (x.equals(obstaclePosX)) {
+            moveWest();
+        }
     }
 
     private void moveSouth() {
@@ -154,5 +159,6 @@ public class Rover {
 
     public void addObstacle(Integer positionX, Integer positionY) {
         this.obstaclePosY = positionY;
+        this.obstaclePosX = positionX;
     }
 }
