@@ -1,9 +1,9 @@
 package de.c_peper.kata.rover;
 
 /**
- * X = 0..9 W <-> E
- * Y = 0..9 S <-> N
- * direction = N,E,S,W
+ * X = 0..9 W <-> E ( -> RoverArea)
+ * Y = 0..9 S <-> N ( -> RoverArea)
+ * direction = N,E,S,W ( -> Direction)
  * R: N->E->S->W->N
  * L: N->W->S->E->N
  */
@@ -24,7 +24,7 @@ public class Rover {
     private Boolean continueMovement;
 
     public Rover() {
-        this(new RoverArea(10, 10));
+        this(RoverArea.getDefaultField());
     }
 
     public Rover(RoverArea field) {
@@ -90,7 +90,7 @@ public class Rover {
     private void moveNorth() {
         y++;
         if (y.equals(field.getMaxY())) {
-            y = 0;
+            y = field.getMinY();
         }
         if (y.equals(obstaclePosY)) {
             continueMovement = Boolean.FALSE;
@@ -100,7 +100,7 @@ public class Rover {
 
     private void moveWest() {
         x--;
-        if (x < 0) {
+        if (x < field.getMinX()) {
             x = field.getMaxX() - 1;
         }
         if (x.equals(obstaclePosX)) {
@@ -112,7 +112,7 @@ public class Rover {
     private void moveEast() {
         x++;
         if (x.equals(field.getMaxX())) {
-            x = 0;
+            x = field.getMinX();
         }
         if (x.equals(obstaclePosX)) {
             continueMovement = Boolean.FALSE;
@@ -122,7 +122,7 @@ public class Rover {
 
     private void moveSouth() {
         y--;
-        if (y < 0) {
+        if (y < field.getMinY()) {
             y = field.getMaxY() - 1;
         }
         if (y.equals(obstaclePosY)) {
