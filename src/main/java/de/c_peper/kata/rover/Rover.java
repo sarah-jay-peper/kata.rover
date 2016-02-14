@@ -9,9 +9,7 @@ package de.c_peper.kata.rover;
  */
 public class Rover {
 
-    public static final int MAX_Y = 10;
-
-    public static final int MAX_X = 10;
+    private RoverArea field;
 
     private Integer x;
 
@@ -26,6 +24,11 @@ public class Rover {
     private Boolean continueMovement;
 
     public Rover() {
+        this(new RoverArea(10, 10));
+    }
+
+    public Rover(RoverArea field) {
+        this.field = field;
         x = 0;
         y = 0;
         direction = Direction.N;
@@ -86,7 +89,7 @@ public class Rover {
 
     private void moveNorth() {
         y++;
-        if (y == MAX_Y) {
+        if (y.equals(field.getMaxY())) {
             y = 0;
         }
         if (y.equals(obstaclePosY)) {
@@ -98,7 +101,7 @@ public class Rover {
     private void moveWest() {
         x--;
         if (x < 0) {
-            x = MAX_X - 1;
+            x = field.getMaxX() - 1;
         }
         if (x.equals(obstaclePosX)) {
             continueMovement = Boolean.FALSE;
@@ -108,7 +111,7 @@ public class Rover {
 
     private void moveEast() {
         x++;
-        if (x == MAX_X) {
+        if (x.equals(field.getMaxX())) {
             x = 0;
         }
         if (x.equals(obstaclePosX)) {
@@ -120,7 +123,7 @@ public class Rover {
     private void moveSouth() {
         y--;
         if (y < 0) {
-            y = MAX_Y - 1;
+            y = field.getMaxY() - 1;
         }
         if (y.equals(obstaclePosY)) {
             continueMovement = Boolean.FALSE;
