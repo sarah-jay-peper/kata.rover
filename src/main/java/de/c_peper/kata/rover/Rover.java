@@ -9,11 +9,7 @@ package de.c_peper.kata.rover;
  */
 public class Rover {
 
-    private RoverArea field;
-
-    private Integer x;
-
-    private Integer y;
+    private RoverPosition position;
 
     private Direction direction;
 
@@ -28,14 +24,12 @@ public class Rover {
     }
 
     public Rover(RoverArea field) {
-        this.field = field;
-        x = 0;
-        y = 0;
+        position = new RoverPosition(field, 0, 0);
         direction = Direction.N;
     }
 
     public String getPositionString() {
-        return x + "," + y + "," + direction.toString();
+        return position.toString() + "," + direction.toString();
     }
 
     public void processInput(char input) {
@@ -88,47 +82,19 @@ public class Rover {
     }
 
     private void moveNorth() {
-        y++;
-        if (y.equals(field.getMaxY())) {
-            y = field.getMinY();
-        }
-        if (y.equals(obstaclePosY)) {
-            continueMovement = Boolean.FALSE;
-            moveSouth();
-        }
+        continueMovement = position.moveNorth(obstaclePosY);
     }
 
     private void moveWest() {
-        x--;
-        if (x < field.getMinX()) {
-            x = field.getMaxX() - 1;
-        }
-        if (x.equals(obstaclePosX)) {
-            continueMovement = Boolean.FALSE;
-            moveEast();
-        }
+        continueMovement = position.moveWest(obstaclePosX);
     }
 
     private void moveEast() {
-        x++;
-        if (x.equals(field.getMaxX())) {
-            x = field.getMinX();
-        }
-        if (x.equals(obstaclePosX)) {
-            continueMovement = Boolean.FALSE;
-            moveWest();
-        }
+        continueMovement = position.moveEast(obstaclePosX);
     }
 
     private void moveSouth() {
-        y--;
-        if (y < field.getMinY()) {
-            y = field.getMaxY() - 1;
-        }
-        if (y.equals(obstaclePosY)) {
-            continueMovement = Boolean.FALSE;
-            moveNorth();
-        }
+        continueMovement = position.moveSouth(obstaclePosY);
     }
 
     private void turnRight() {
