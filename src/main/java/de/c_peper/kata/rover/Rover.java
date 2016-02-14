@@ -100,6 +100,9 @@ public class Rover {
         if (x < 0) {
             x = MAX_X - 1;
         }
+        if (x.equals(obstaclePosX)) {
+            moveEast();
+        }
     }
 
     private void moveEast() {
@@ -116,6 +119,9 @@ public class Rover {
         y--;
         if (y < 0) {
             y = MAX_Y - 1;
+        }
+        if (y.equals(obstaclePosY)) {
+            moveNorth();
         }
     }
 

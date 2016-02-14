@@ -88,8 +88,12 @@ class RoverSpec extends Specification {
         rover.getPositionString() == result
 
         where:
-        input | result  | obsX | obsY | testName
-        "FF"  | "0,1,N" | 0    | 2    | "obstacle at 0/2"
-        "RFF" | "1,0,E" | 2    | 0    | "obstacle at 2/0"
+        input  | result  | obsX | obsY | testName
+        "FF"   | "0,1,N" | 0    | 2    | "obstacle at 0/2"
+        "RFF"  | "1,0,E" | 2    | 0    | "obstacle at 2/0"
+        "LFF"  | "9,0,W" | 8    | 0    | "obstacle at 8/0"
+        "RBB"  | "9,0,E" | 8    | 0    | "obstacle at 8/0, driving backwards"
+        "BB"   | "0,9,N" | 0    | 8    | "obstacle at 0/8, driving backwards"
+        "RRFF" | "0,9,S" | 0    | 8    | "obstacle at 0/8"
     }
 }
