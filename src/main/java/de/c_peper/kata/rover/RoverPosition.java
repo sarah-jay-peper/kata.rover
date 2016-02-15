@@ -12,22 +12,17 @@ public class RoverPosition extends Position {
         this.field = field;
     }
 
-    public void setNewPosition(Integer x, Integer y) {
-        this.x = x;
-        this.y = y;
-    }
-
     @Override
     public String toString() {
         return x + "," + y;
     }
 
-    public Boolean moveNorth(Position obstacle) {
+    public Boolean moveNorth() {
         Integer newY = getY() + 1;
         if (newY.equals(field.getMaxY())) {
             newY = field.getMinY();
         }
-        if (obstacle.equals(getX(), newY)) {
+        if (field.hasObstacle(getX(), newY)) {
             return Boolean.FALSE;
         } else {
             setY(newY);
@@ -35,36 +30,36 @@ public class RoverPosition extends Position {
         return Boolean.TRUE;
     }
 
-    public Boolean moveWest(Position obstacle) {
+    public Boolean moveWest() {
         Integer newX = getX() - 1;
         if (newX < field.getMinX()) {
             newX = field.getMaxX() - 1;
         }
-        if (obstacle.equals(newX, getY())) {
+        if (field.hasObstacle(newX, getY())) {
             return Boolean.FALSE;
         }
         setX(newX);
         return Boolean.TRUE;
     }
 
-    public Boolean moveEast(Position obstacle) {
+    public Boolean moveEast() {
         Integer newX = getX() + 1;
         if (newX.equals(field.getMaxX())) {
             newX = field.getMinX();
         }
-        if (obstacle.equals(newX, getY())) {
+        if (field.hasObstacle(newX, getY())) {
             return Boolean.FALSE;
         }
         setX(newX);
         return Boolean.TRUE;
     }
 
-    public Boolean moveSouth(Position obstacle) {
+    public Boolean moveSouth() {
         Integer newY = getY() -1;
         if (newY < field.getMinY()) {
             newY = field.getMaxY() - 1;
         }
-        if (obstacle.equals(getX(), newY)) {
+        if (field.hasObstacle(getX(), newY)) {
             return Boolean.FALSE;
         }
         setY(newY);

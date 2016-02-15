@@ -11,7 +11,4 @@ public class Position {
 
     protected Integer y;
 
-    public Boolean equals(Integer x, Integer y) {
-        return equals(new Position(x, y));
-    }
 }

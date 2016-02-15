@@ -165,24 +165,26 @@ class RoverSpec extends Specification {
             "LB"       | "1,0,W"  | -5        | -5        | "field: -5..5/-5..5, backward west 1"
     }
 
-//    @Unroll
-//    def "multiple obstacles to avoid at 0/2, 2/0 and 2/2 : #testName"() {
-//        given: "new Rover"
-//            def rover = new Rover()
-//
-//        and: "obstacle"
-//            rover.addObstacle(0, 2);
-//            rover.addObstacle(2, 0);
-//            rover.addObstacle(3, 3);
-//
-//        when: "movement input"
-//            rover.processInput(input)
-//
-//        then: "expect result"
-//            rover.getPositionString() == result
-//
-//        where:
-//            input | result  | testName
-//            "FFF" | "0,1,N" | "hit first obstacle"
-//    }
+    @Unroll
+    def "multiple obstacles to avoid at 0/2, 2/0 and 3/3 : #testName"() {
+        given: "new Rover"
+            def rover = new Rover()
+
+        and: "obstacle"
+            rover.addObstacle(0, 2);
+            rover.addObstacle(2, 0);
+            rover.addObstacle(3, 3);
+
+        when: "movement input"
+            rover.processInput(input)
+
+        then: "expect result"
+            rover.getPositionString() == result
+
+        where:
+            input      | result  | testName
+            "FFF"      | "0,1,N" | "hit first obstacle"
+            "RFFF"     | "1,0,E" | "hit second obstacle"
+            "FRFFFLFF" | "3,2,N" | "hit third obstacle"
+    }
 }
