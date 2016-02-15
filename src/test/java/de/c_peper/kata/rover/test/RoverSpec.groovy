@@ -119,6 +119,10 @@ class RoverSpec extends Specification {
             "RFFRF"  | "1,0,E" | 2    | 0    | "obstacle at 2/0, going south at obstacle"
             "LFFLF"  | "9,0,W" | 8    | 0    | "obstacle at 8/0, going west at obstacle"
             "RRFFRF" | "0,9,S" | 0    | 8    | "obstacle at 0/8, going west at obstacle"
+            "FFF"    | "0,3,N" | 1    | 2    | "obstacle at 1/2, going north, not hit"
+            "RFFF"   | "3,0,E" | 2    | 1    | "obstacle at 2/1, going east, not hit"
+            "LFFF"   | "7,0,W" | 8    | 1    | "obstacle at 1/2, going west, not hit"
+            "RRFFF"  | "0,7,S" | 1    | 8    | "obstacle at 1/2, going south, not hit"
     }
 
     @Unroll
@@ -160,4 +164,25 @@ class RoverSpec extends Specification {
             "LFFFFFF"  | "4,0,W"  | -5        | -5        | "field: -5..5/-5..5, forward west 6"
             "LB"       | "1,0,W"  | -5        | -5        | "field: -5..5/-5..5, backward west 1"
     }
+
+//    @Unroll
+//    def "multiple obstacles to avoid at 0/2, 2/0 and 2/2 : #testName"() {
+//        given: "new Rover"
+//            def rover = new Rover()
+//
+//        and: "obstacle"
+//            rover.addObstacle(0, 2);
+//            rover.addObstacle(2, 0);
+//            rover.addObstacle(3, 3);
+//
+//        when: "movement input"
+//            rover.processInput(input)
+//
+//        then: "expect result"
+//            rover.getPositionString() == result
+//
+//        where:
+//            input | result  | testName
+//            "FFF" | "0,1,N" | "hit first obstacle"
+//    }
 }

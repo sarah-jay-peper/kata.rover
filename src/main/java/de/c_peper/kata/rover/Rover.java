@@ -13,9 +13,7 @@ public class Rover {
 
     private Direction direction;
 
-    private Integer obstaclePosY;
-
-    private Integer obstaclePosX;
+    private Position obstacle;
 
     private Boolean continueMovement;
 
@@ -26,6 +24,7 @@ public class Rover {
     public Rover(RoverArea field) {
         position = new RoverPosition(field, 0, 0);
         direction = Direction.N;
+        obstacle = new Position(Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
     public String getPositionString() {
@@ -82,19 +81,19 @@ public class Rover {
     }
 
     private void moveNorth() {
-        continueMovement = position.moveNorth(obstaclePosY);
+        continueMovement = position.moveNorth(obstacle);
     }
 
     private void moveWest() {
-        continueMovement = position.moveWest(obstaclePosX);
+        continueMovement = position.moveWest(obstacle);
     }
 
     private void moveEast() {
-        continueMovement = position.moveEast(obstaclePosX);
+        continueMovement = position.moveEast(obstacle);
     }
 
     private void moveSouth() {
-        continueMovement = position.moveSouth(obstaclePosY);
+        continueMovement = position.moveSouth(obstacle);
     }
 
     private void turnRight() {
@@ -140,7 +139,6 @@ public class Rover {
     }
 
     public void addObstacle(Integer positionX, Integer positionY) {
-        this.obstaclePosY = positionY;
-        this.obstaclePosX = positionX;
+        this.obstacle = new Position(positionX, positionY);
     }
 }
