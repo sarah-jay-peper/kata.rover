@@ -7,6 +7,13 @@
     <groupId>de.c_peper.kata</groupId>
     <artifactId>rover</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <properties>
+        <groovy.version>2.4.5</groovy.version>
+        <groovy-eclipse-compiler.version>2.9.2-01</groovy-eclipse-compiler.version>
+        <groovy-eclipse-batch.version>2.4.3-01</groovy-eclipse-batch.version>
+        <spock.version>1.0-groovy-2.4</spock.version>
+        <lombok.version>1.16.6</lombok.version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -22,12 +29,13 @@
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
-            <version>2.3.7</version>
+            <version>${groovy.version}</version>
         </dependency>
         <dependency>
             <groupId>org.spockframework</groupId>
-            <artifactId>spock-maven</artifactId>
-            <version>0.7-groovy-2.0</version>
+            <artifactId>spock-core</artifactId>
+            <version>${spock.version}</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
@@ -35,12 +43,12 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <includes>
+                        <include>**/*Test.java</include>
+                        <include>**/*Spec.java</include>
+                    </includes>
                 </configuration>
             </plugin>
             <plugin>
@@ -48,28 +56,31 @@
                 <!-- 2.8.0-01 and later require maven-compiler-plugin 3.1 or higher -->
                 <version>3.1</version>
                 <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <compilerId>groovy-eclipse-compiler</compilerId>
-                    <fork>true</fork>
+                    <verbose>false</verbose>
                     <compilerArguments>
                         <javaAgentClass>lombok.launch.Agent</javaAgentClass>
                     </compilerArguments>
+                    <fork>true</fork>
                 </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.codehaus.groovy</groupId>
                         <artifactId>groovy-eclipse-compiler</artifactId>
-                        <version>2.9.1-01</version>
+                        <version>${groovy-eclipse-compiler.version}</version>
                     </dependency>
                     <!-- for 2.8.0-01 and later you must have an explicit dependency on groovy-eclipse-batch -->
                     <dependency>
                         <groupId>org.codehaus.groovy</groupId>
                         <artifactId>groovy-eclipse-batch</artifactId>
-                        <version>2.3.7-01</version>
+                        <version>${groovy-eclipse-batch.version}</version>
                     </dependency>
                     <dependency>
                         <groupId>org.projectlombok</groupId>
                         <artifactId>lombok</artifactId>
-                        <version>1.16.6</version>
+                        <version>${lombok.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
