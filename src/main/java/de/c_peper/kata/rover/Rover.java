@@ -33,17 +33,13 @@ public class Rover {
         return position.toString() + "," + direction.toString();
     }
 
-    public void processInput(char input) {
-        handleSingleInput(input);
-    }
-
-    private Boolean handleSingleInput(char input) {
+    public Boolean processInput(char input) {
         return inputAction.act(input);
     }
 
     public void processInput(String inputString) {
         for (char inputChar : inputString.toCharArray()) {
-            Boolean continueMovement = handleSingleInput(inputChar);
+            Boolean continueMovement = processInput(inputChar);
             if (!continueMovement) {
                 break;
             }
