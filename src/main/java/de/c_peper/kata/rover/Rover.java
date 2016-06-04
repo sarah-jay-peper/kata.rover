@@ -38,12 +38,8 @@ public class Rover {
     }
 
     public void processInput(String inputString) {
-        for (char inputChar : inputString.toCharArray()) {
-            Boolean continueMovement = processInput(inputChar);
-            if (!continueMovement) {
-                break;
-            }
-        }
+        inputString.chars()
+                .anyMatch((c)->!processInput((char)c));
     }
 
     public void addObstacle(Integer positionX, Integer positionY) {
