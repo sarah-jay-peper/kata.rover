@@ -21,7 +21,7 @@ public class Rover {
 
     public Rover(RoverArea field) {
         position = new RoverPosition(field, 0, 0);
-        direction = Direction.N;
+        direction = new North();
     }
 
     public String getPositionString() {
@@ -31,97 +31,16 @@ public class Rover {
     public void processInput(char input) {
         switch (input) {
             case 'R':
-                turnRight();
+                direction = direction.turnRight();
                 break;
             case 'L':
-                turnLeft();
+                direction = direction.turnLeft();
                 break;
             case 'F':
-                moveForward();
+                continueMovement = direction.forwards(position);
                 break;
             case 'B':
-                moveBackward();
-        }
-    }
-
-    private void moveBackward() {
-        switch (direction) {
-            case N:
-                moveSouth();
-                break;
-            case E:
-                moveWest();
-                break;
-            case W:
-                moveEast();
-                break;
-            case S:
-                moveNorth();
-        }
-    }
-
-    private void moveForward() {
-        switch (direction) {
-            case N:
-                moveNorth();
-                break;
-            case E:
-                moveEast();
-                break;
-            case S:
-                moveSouth();
-                break;
-            case W:
-                moveWest();
-                break;
-        }
-    }
-
-    private void moveNorth() {
-        continueMovement = position.moveNorth();
-    }
-
-    private void moveWest() {
-        continueMovement = position.moveWest();
-    }
-
-    private void moveEast() {
-        continueMovement = position.moveEast();
-    }
-
-    private void moveSouth() {
-        continueMovement = position.moveSouth();
-    }
-
-    private void turnRight() {
-        switch (direction) {
-            case N:
-                direction = Direction.E;
-                break;
-            case E:
-                direction = Direction.S;
-                break;
-            case S:
-                direction = Direction.W;
-                break;
-            case W:
-                direction = Direction.N;
-        }
-    }
-
-    private void turnLeft() {
-        switch (direction) {
-            case N:
-                direction = Direction.W;
-                break;
-            case W:
-                direction = Direction.S;
-                break;
-            case S:
-                direction = Direction.E;
-                break;
-            case E:
-                direction = Direction.N;
+                continueMovement = direction.backwards(position);
         }
     }
 
