@@ -13,8 +13,6 @@ public class Rover {
 
     private Direction direction;
 
-    private Boolean continueMovement;
-
     public Rover() {
         this(RoverArea.getDefaultField());
     }
@@ -29,25 +27,29 @@ public class Rover {
     }
 
     public void processInput(char input) {
+        handleSingleInput(input);
+    }
+
+    private Boolean handleSingleInput(char input) {
         switch (input) {
             case 'R':
                 direction = direction.turnRight();
-                break;
+                return Boolean.TRUE;
             case 'L':
                 direction = direction.turnLeft();
-                break;
+                return Boolean.TRUE;
             case 'F':
-                continueMovement = direction.forwards(position);
-                break;
+                return direction.forwards(position);
             case 'B':
-                continueMovement = direction.backwards(position);
+                return direction.backwards(position);
+            default:
+                return Boolean.FALSE;
         }
     }
 
     public void processInput(String inputString) {
-        continueMovement = Boolean.TRUE;
         for (char inputChar : inputString.toCharArray()) {
-            processInput(inputChar);
+            Boolean continueMovement = handleSingleInput(inputChar);
             if (!continueMovement) {
                 break;
             }

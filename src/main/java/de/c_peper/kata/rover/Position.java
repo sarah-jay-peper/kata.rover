@@ -6,7 +6,7 @@ import lombok.*;
 @Setter(value = AccessLevel.PROTECTED)
 @EqualsAndHashCode
 @AllArgsConstructor
-public class Position {
+class Position {
     protected Integer x;
 
     protected Integer y;

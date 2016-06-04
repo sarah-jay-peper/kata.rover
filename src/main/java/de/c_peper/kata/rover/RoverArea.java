@@ -20,7 +20,7 @@ public class RoverArea {
 
     private List<Position> obstacles = new ArrayList<>();
 
-    public static RoverArea getDefaultField() {
+    static RoverArea getDefaultField() {
         return new RoverArea(0, 0, 10, 10);
     }
 
@@ -28,11 +28,11 @@ public class RoverArea {
         return new RoverArea(0, 0, maxX, maxY);
     }
 
-    public void addObstacle(Position obstacle) {
+    void addObstacle(Position obstacle) {
         obstacles.add(obstacle);
     }
 
-    public Boolean hasObstacle(Integer x, Integer y) {
+    Boolean hasObstacle(Integer x, Integer y) {
         return hasObstacle(new Position(x,y));
     }
 
