@@ -1,5 +1,9 @@
 package de.c_peper.kata.rover;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
+
 /**
  * X = 0..9 W <-> E ( -> RoverArea)
  * Y = 0..9 S <-> N ( -> RoverArea)
@@ -13,6 +17,8 @@ public class Rover {
 
     private Direction direction;
 
+    private InputActions inputAction;
+
     public Rover() {
         this(RoverArea.getDefaultField());
     }
@@ -20,6 +26,7 @@ public class Rover {
     public Rover(RoverArea field) {
         position = new RoverPosition(field, 0, 0);
         direction = Direction.init();
+        inputAction = new InputActions();
     }
 
     public String getPositionString() {
@@ -31,20 +38,7 @@ public class Rover {
     }
 
     private Boolean handleSingleInput(char input) {
-        switch (input) {
-            case 'R':
-                direction = direction.turnRight();
-                return Boolean.TRUE;
-            case 'L':
-                direction = direction.turnLeft();
-                return Boolean.TRUE;
-            case 'F':
-                return direction.forwards(position);
-            case 'B':
-                return direction.backwards(position);
-            default:
-                return Boolean.FALSE;
-        }
+        return inputAction.act(input);
     }
 
     public void processInput(String inputString) {
@@ -58,5 +52,31 @@ public class Rover {
 
     public void addObstacle(Integer positionX, Integer positionY) {
         position.getField().addObstacle(new Position(positionX, positionY));
+    }
+
+    private class InputActions {
+
+        InputActions() {
+            add('R', () -> {
+                direction = direction.turnRight();
+                return Boolean.TRUE;
+            });
+            add('L', () -> {
+                direction = direction.turnLeft();
+                return Boolean.TRUE;
+            });
+            add('F', () -> direction.forwards(position));
+            add('B', () -> direction.backwards(position));
+        }
+
+        private Map<Character, Supplier<Boolean>> map = new HashMap<>();
+
+        private void add(char input, Supplier<Boolean> supplier) {
+            map.put(input, supplier);
+        }
+
+        private Boolean act(char input) {
+            return map.get(input).get();
+        }
     }
 }
