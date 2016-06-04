@@ -19,7 +19,7 @@ public class Rover {
 
     public Rover(RoverArea field) {
         position = new RoverPosition(field, 0, 0);
-        direction = new North();
+        direction = Direction.init();
     }
 
     public String getPositionString() {

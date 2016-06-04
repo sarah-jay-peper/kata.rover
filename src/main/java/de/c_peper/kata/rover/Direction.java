@@ -11,116 +11,120 @@ abstract class Direction {
     public abstract Direction turnLeft();
 
     public abstract String toString();
-}
 
-class North extends Direction {
-
-    @Override
-    public Boolean forwards(RoverPosition position) {
-        return position.moveNorth();
-    }
-
-    @Override
-    public Boolean backwards(RoverPosition position) {
-        return position.moveSouth();
-    }
-
-    @Override
-    public Direction turnRight() {
-        return new East();
-    }
-
-    @Override
-    public Direction turnLeft() {
-        return new West();
-    }
-
-    @Override
-    public String toString() {
-        return "N";
-    }
-}
-
-class East extends Direction {
-
-    @Override
-    public Boolean forwards(RoverPosition position) {
-        return position.moveEast();
-    }
-
-    @Override
-    public Boolean backwards(RoverPosition position) {
-        return position.moveWest();
-    }
-
-    @Override
-    public Direction turnRight() {
-        return new South();
-    }
-
-    @Override
-    public Direction turnLeft() {
+    static Direction init() {
         return new North();
     }
 
-    @Override
-    public String toString() {
-        return "E";
-    }
-}
+    private static class North extends Direction {
 
-class South extends Direction {
+        @Override
+        public Boolean forwards(RoverPosition position) {
+            return position.moveNorth();
+        }
 
-    @Override
-    public Boolean forwards(RoverPosition position) {
-        return position.moveSouth();
-    }
+        @Override
+        public Boolean backwards(RoverPosition position) {
+            return position.moveSouth();
+        }
 
-    @Override
-    public Boolean backwards(RoverPosition position) {
-        return position.moveNorth();
-    }
+        @Override
+        public Direction turnRight() {
+            return new East();
+        }
 
-    @Override
-    public Direction turnRight() {
-        return new West();
-    }
+        @Override
+        public Direction turnLeft() {
+            return new West();
+        }
 
-    @Override
-    public Direction turnLeft() {
-        return new East();
-    }
-
-    @Override
-    public String toString() {
-        return "S";
-    }
-}
-
-class West extends Direction {
-
-    @Override
-    public Boolean forwards(RoverPosition position) {
-        return position.moveWest();
+        @Override
+        public String toString() {
+            return "N";
+        }
     }
 
-    @Override
-    public Boolean backwards(RoverPosition position) {
-        return position.moveEast();
+    private static class East extends Direction {
+
+        @Override
+        public Boolean forwards(RoverPosition position) {
+            return position.moveEast();
+        }
+
+        @Override
+        public Boolean backwards(RoverPosition position) {
+            return position.moveWest();
+        }
+
+        @Override
+        public Direction turnRight() {
+            return new South();
+        }
+
+        @Override
+        public Direction turnLeft() {
+            return new North();
+        }
+
+        @Override
+        public String toString() {
+            return "E";
+        }
     }
 
-    @Override
-    public Direction turnRight() {
-        return new North();
+    private static class South extends Direction {
+
+        @Override
+        public Boolean forwards(RoverPosition position) {
+            return position.moveSouth();
+        }
+
+        @Override
+        public Boolean backwards(RoverPosition position) {
+            return position.moveNorth();
+        }
+
+        @Override
+        public Direction turnRight() {
+            return new West();
+        }
+
+        @Override
+        public Direction turnLeft() {
+            return new East();
+        }
+
+        @Override
+        public String toString() {
+            return "S";
+        }
     }
 
-    @Override
-    public Direction turnLeft() {
-        return new South();
-    }
+    private static class West extends Direction {
 
-    @Override
-    public String toString() {
-        return "W";
+        @Override
+        public Boolean forwards(RoverPosition position) {
+            return position.moveWest();
+        }
+
+        @Override
+        public Boolean backwards(RoverPosition position) {
+            return position.moveEast();
+        }
+
+        @Override
+        public Direction turnRight() {
+            return new North();
+        }
+
+        @Override
+        public Direction turnLeft() {
+            return new South();
+        }
+
+        @Override
+        public String toString() {
+            return "W";
+        }
     }
 }
