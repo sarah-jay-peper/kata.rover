@@ -48,7 +48,7 @@ class RoverPosition extends Position {
     }
 
     Boolean moveSouth() {
-        Integer newY = getY() -1;
+        Integer newY = getY() - 1;
         if (newY < field.getMinY()) {
             newY = field.getMaxY() - 1;
         }

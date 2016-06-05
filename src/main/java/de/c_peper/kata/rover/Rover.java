@@ -29,13 +29,9 @@ public class Rover {
         inputAction = new InputActions();
     }
 
-    public String getPositionString() {
-        return position.toString() + "," + direction.toString();
-    }
+    public String getPositionString() { return position.toString() + "," + direction.toString(); }
 
-    public Boolean move(int input) {
-        return inputAction.act(input);
-    }
+    public Boolean move(int input) { return inputAction.act(input); }
 
     public void move(String inputString) {
         inputString.chars()
@@ -52,6 +48,8 @@ public class Rover {
 
     private class InputActions {
 
+        private Map<Integer, Supplier<Boolean>> map = new HashMap<>();
+
         InputActions() {
             add('R', () -> {
                 direction = direction.turnRight();
@@ -64,8 +62,6 @@ public class Rover {
             add('F', () -> direction.forwards(position));
             add('B', () -> direction.backwards(position));
         }
-
-        private Map<Integer, Supplier<Boolean>> map = new HashMap<>();
 
         private void add(int input, Supplier<Boolean> supplier) {
             map.put(input, supplier);

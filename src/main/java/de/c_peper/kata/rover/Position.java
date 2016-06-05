@@ -1,6 +1,10 @@
 package de.c_peper.kata.rover;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter(value = AccessLevel.PROTECTED)

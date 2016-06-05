@@ -33,7 +33,7 @@ public class RoverArea {
     }
 
     Boolean hasObstacle(Integer x, Integer y) {
-        return hasObstacle(new Position(x,y));
+        return hasObstacle(new Position(x, y));
     }
 
     private Boolean hasObstacle(Position position) {

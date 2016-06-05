@@ -2,6 +2,10 @@ package de.c_peper.kata.rover;
 
 abstract class Direction {
 
+    static Direction init() {
+        return new North();
+    }
+
     public abstract Boolean forwards(RoverPosition position);
 
     public abstract Boolean backwards(RoverPosition position);
@@ -11,10 +15,6 @@ abstract class Direction {
     public abstract Direction turnLeft();
 
     public abstract String toString();
-
-    static Direction init() {
-        return new North();
-    }
 
     private static class North extends Direction {
 
