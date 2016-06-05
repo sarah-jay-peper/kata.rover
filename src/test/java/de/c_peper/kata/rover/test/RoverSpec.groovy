@@ -13,7 +13,7 @@ class RoverSpec extends Specification {
             def rover = new Rover()
 
         when: "movement input"
-            rover.processInput(input)
+            rover.move(input)
 
         then: "expect result"
             rover.getPositionString() == result
@@ -32,7 +32,7 @@ class RoverSpec extends Specification {
             def rover = new Rover()
 
         when: "movement input"
-            rover.processInput(input)
+            rover.move(input)
 
         then: "expect result"
             rover.getPositionString() == result
@@ -53,7 +53,7 @@ class RoverSpec extends Specification {
             def rover = new Rover()
 
         when: "movement input"
-            rover.processInput(input)
+            rover.move(input)
 
         then: "expect result"
             rover.getPositionString() == result
@@ -83,7 +83,7 @@ class RoverSpec extends Specification {
             rover.addObstacle(obsX, obsY);
 
         when: "movement input"
-            rover.processInput(input)
+            rover.move(input)
 
         then: "expect result"
             rover.getPositionString() == result
@@ -107,7 +107,7 @@ class RoverSpec extends Specification {
             rover.addObstacle(obsX, obsY);
 
         when: "movement input"
-            rover.processInput(input)
+            rover.move(input)
 
         then: "expect result"
             rover.getPositionString() == result
@@ -131,7 +131,7 @@ class RoverSpec extends Specification {
             def rover = new Rover(RoverArea.getZeroBasedField(fieldX, fieldY))
 
         when: "movement input"
-            rover.processInput(input)
+            rover.move(input)
 
         then: "expect result"
             rover.getPositionString() == result
@@ -149,7 +149,7 @@ class RoverSpec extends Specification {
             def rover = new Rover(new RoverArea(fieldMinX, fieldMinY, 5, 5))
 
         when: "movement input"
-            rover.processInput(input)
+            rover.move(input)
 
         then: "expect result"
             rover.getPositionString() == result
@@ -176,7 +176,7 @@ class RoverSpec extends Specification {
             rover.addObstacle(3, 3);
 
         when: "movement input"
-            rover.processInput(input)
+            rover.move(input)
 
         then: "expect result"
             rover.getPositionString() == result

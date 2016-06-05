@@ -17,7 +17,7 @@ public class RoverTest {
     public void testTurnRight() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput('R');
+        rover.move('R');
 
         assertEquals(rover.getPositionString(), ("0,0,E"));
     }
@@ -26,8 +26,8 @@ public class RoverTest {
     public void testTurnRightRight() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput('R');
-        rover.processInput('R');
+        rover.move('R');
+        rover.move('R');
 
         assertEquals(rover.getPositionString(), ("0,0,S"));
     }
@@ -36,9 +36,9 @@ public class RoverTest {
     public void testTurnRightRightRight() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput('R');
-        rover.processInput('R');
-        rover.processInput('R');
+        rover.move('R');
+        rover.move('R');
+        rover.move('R');
 
         assertEquals(rover.getPositionString(), ("0,0,W"));
     }
@@ -47,10 +47,10 @@ public class RoverTest {
     public void testTurnRightRightRightRight() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput('R');
-        rover.processInput('R');
-        rover.processInput('R');
-        rover.processInput('R');
+        rover.move('R');
+        rover.move('R');
+        rover.move('R');
+        rover.move('R');
 
         assertEquals(rover.getPositionString(), ("0,0,N"));
     }
@@ -59,7 +59,7 @@ public class RoverTest {
     public void testTurnLeft() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput('L');
+        rover.move('L');
 
         assertEquals(rover.getPositionString(), ("0,0,W"));
     }
@@ -68,8 +68,8 @@ public class RoverTest {
     public void testTurnLeftLeft() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput('L');
-        rover.processInput('L');
+        rover.move('L');
+        rover.move('L');
 
         assertEquals(rover.getPositionString(), ("0,0,S"));
     }
@@ -78,9 +78,9 @@ public class RoverTest {
     public void testTurnLeftLeftLeft() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput('L');
-        rover.processInput('L');
-        rover.processInput('L');
+        rover.move('L');
+        rover.move('L');
+        rover.move('L');
 
         assertEquals(rover.getPositionString(), ("0,0,E"));
     }
@@ -89,10 +89,10 @@ public class RoverTest {
     public void testTurnLeftLeftLeftLeft() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput('L');
-        rover.processInput('L');
-        rover.processInput('L');
-        rover.processInput('L');
+        rover.move('L');
+        rover.move('L');
+        rover.move('L');
+        rover.move('L');
 
         assertEquals(rover.getPositionString(), ("0,0,N"));
     }
@@ -101,7 +101,7 @@ public class RoverTest {
     public void testTurnRightRightRightAsString() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput("RRR");
+        rover.move("RRR");
 
         assertEquals(rover.getPositionString(), ("0,0,W"));
     }
@@ -110,7 +110,7 @@ public class RoverTest {
     public void testMoveForward() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput('F');
+        rover.move('F');
 
         assertEquals(rover.getPositionString(), ("0,1,N"));
     }
@@ -119,7 +119,7 @@ public class RoverTest {
     public void testMoveBackward() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput('B');
+        rover.move('B');
 
         assertEquals(rover.getPositionString(), ("0,9,N"));
     }
@@ -128,7 +128,7 @@ public class RoverTest {
     public void testMoveForwardThanBackward() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput("FB");
+        rover.move("FB");
 
         assertEquals(rover.getPositionString(), ("0,0,N"));
     }
@@ -137,7 +137,7 @@ public class RoverTest {
     public void testMoveBackwardThanForward() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput("BF");
+        rover.move("BF");
 
         assertEquals(rover.getPositionString(), ("0,0,N"));
     }
@@ -146,7 +146,7 @@ public class RoverTest {
     public void testTurnRightThanMoveForward() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput("RF");
+        rover.move("RF");
 
         assertEquals(rover.getPositionString(), "1,0,E");
     }
@@ -155,7 +155,7 @@ public class RoverTest {
     public void testTurnRightRightThanMoveForward() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput("RRF");
+        rover.move("RRF");
 
         assertEquals("0,9,S", rover.getPositionString());
     }
@@ -164,7 +164,7 @@ public class RoverTest {
     public void testTurnRightRightThanMoveTwiceForward() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput("RRFF");
+        rover.move("RRFF");
 
         assertEquals("0,8,S", rover.getPositionString());
     }
@@ -173,7 +173,7 @@ public class RoverTest {
     public void testTurnRightThanMoveBackward() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput("RB");
+        rover.move("RB");
 
         assertEquals(rover.getPositionString(), "9,0,E");
     }
@@ -182,7 +182,7 @@ public class RoverTest {
     public void testTurnRightThanMoveTwiceBackward() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput("RBB");
+        rover.move("RBB");
 
         assertEquals(rover.getPositionString(), "8,0,E");
     }
@@ -191,7 +191,7 @@ public class RoverTest {
     public void testTurnRightThanMoveTwiceBackwardAndTwiceForward() throws Exception {
         Rover rover = new Rover();
 
-        rover.processInput("RBBFF");
+        rover.move("RBBFF");
 
         assertEquals(rover.getPositionString(), "0,0,E");
     }

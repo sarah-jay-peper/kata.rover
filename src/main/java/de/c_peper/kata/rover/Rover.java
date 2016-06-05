@@ -33,17 +33,21 @@ public class Rover {
         return position.toString() + "," + direction.toString();
     }
 
-    public Boolean processInput(char input) {
+    public Boolean move(int input) {
         return inputAction.act(input);
     }
 
-    public void processInput(String inputString) {
+    public void move(String inputString) {
         inputString.chars()
-                .anyMatch((c)->!processInput((char)c));
+                .anyMatch((c) -> isNotSuccessful(move(c)));
     }
 
     public void addObstacle(Integer positionX, Integer positionY) {
         position.getField().addObstacle(new Position(positionX, positionY));
+    }
+
+    private Boolean isNotSuccessful(Boolean successOfMovement) {
+        return !successOfMovement;
     }
 
     private class InputActions {
@@ -61,13 +65,13 @@ public class Rover {
             add('B', () -> direction.backwards(position));
         }
 
-        private Map<Character, Supplier<Boolean>> map = new HashMap<>();
+        private Map<Integer, Supplier<Boolean>> map = new HashMap<>();
 
-        private void add(char input, Supplier<Boolean> supplier) {
+        private void add(int input, Supplier<Boolean> supplier) {
             map.put(input, supplier);
         }
 
-        private Boolean act(char input) {
+        private Boolean act(int input) {
             return map.get(input).get();
         }
     }
