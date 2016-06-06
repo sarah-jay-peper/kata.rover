@@ -8,6 +8,38 @@ import java.util.function.Supplier;
 @Builder
 class Direction {
 
+    private static Direction WEST = Direction.builder()
+            .id("W")
+            .forward(RoverPosition::moveWest)
+            .backward(RoverPosition::moveEast)
+            .right(() -> Direction.NORTH)
+            .left(() -> Direction.SOUTH)
+            .build();
+
+    private static Direction SOUTH = Direction.builder()
+            .id("S")
+            .forward(RoverPosition::moveSouth)
+            .backward(RoverPosition::moveNorth)
+            .right(() -> Direction.WEST)
+            .left(() -> Direction.EAST)
+            .build();
+
+    private static Direction EAST = Direction.builder()
+            .id("E")
+            .forward(RoverPosition::moveEast)
+            .backward(RoverPosition::moveWest)
+            .right(() -> Direction.SOUTH)
+            .left(() -> Direction.NORTH)
+            .build();
+
+    private static Direction NORTH = Direction.builder()
+            .id("N")
+            .forward(RoverPosition::moveNorth)
+            .backward(RoverPosition::moveSouth)
+            .right(() -> Direction.EAST)
+            .left(() -> Direction.WEST)
+            .build();
+
     Function<RoverPosition, Boolean> forward;
 
     Function<RoverPosition, Boolean> backward;
@@ -18,49 +50,7 @@ class Direction {
 
     String id;
 
-    static Direction init() {
-        return north();
-    }
-
-    private static Direction north() {
-        return Direction.builder()
-                .id("N")
-                .forward(RoverPosition::moveNorth)
-                .backward(RoverPosition::moveSouth)
-                .right(Direction::east)
-                .left(Direction::west)
-                .build();
-    }
-
-    private static Direction east() {
-        return Direction.builder()
-                .id("E")
-                .forward(RoverPosition::moveEast)
-                .backward(RoverPosition::moveWest)
-                .right(Direction::south)
-                .left(Direction::north)
-                .build();
-    }
-
-    private static Direction south() {
-        return Direction.builder()
-                .id("S")
-                .forward(RoverPosition::moveSouth)
-                .backward(RoverPosition::moveNorth)
-                .right(Direction::west)
-                .left(Direction::east)
-                .build();
-    }
-
-    private static Direction west() {
-        return Direction.builder()
-                .id("W")
-                .forward(RoverPosition::moveWest)
-                .backward(RoverPosition::moveEast)
-                .right(Direction::north)
-                .left(Direction::south)
-                .build();
-    }
+    static Direction init() { return NORTH; }
 
     Boolean forwards(RoverPosition position) { return forward.apply(position); }
 
