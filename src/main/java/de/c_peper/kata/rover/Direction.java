@@ -1,130 +1,75 @@
 package de.c_peper.kata.rover;
 
-abstract class Direction {
+import lombok.Builder;
+
+import java.util.function.Function;
+import java.util.function.Supplier;
+
+@Builder
+class Direction {
+
+    Function<RoverPosition, Boolean> forward;
+
+    Function<RoverPosition, Boolean> backward;
+
+    Supplier<Direction> left;
+
+    Supplier<Direction> right;
+
+    String id;
 
     static Direction init() {
-        return new North();
+        return north();
     }
 
-    public abstract Boolean forwards(RoverPosition position);
-
-    public abstract Boolean backwards(RoverPosition position);
-
-    public abstract Direction turnRight();
-
-    public abstract Direction turnLeft();
-
-    public abstract String toString();
-
-    private static class North extends Direction {
-
-        @Override
-        public Boolean forwards(RoverPosition position) {
-            return position.moveNorth();
-        }
-
-        @Override
-        public Boolean backwards(RoverPosition position) {
-            return position.moveSouth();
-        }
-
-        @Override
-        public Direction turnRight() {
-            return new East();
-        }
-
-        @Override
-        public Direction turnLeft() {
-            return new West();
-        }
-
-        @Override
-        public String toString() {
-            return "N";
-        }
+    private static Direction north() {
+        return Direction.builder()
+                .id("N")
+                .forward(RoverPosition::moveNorth)
+                .backward(RoverPosition::moveSouth)
+                .right(Direction::east)
+                .left(Direction::west)
+                .build();
     }
 
-    private static class East extends Direction {
-
-        @Override
-        public Boolean forwards(RoverPosition position) {
-            return position.moveEast();
-        }
-
-        @Override
-        public Boolean backwards(RoverPosition position) {
-            return position.moveWest();
-        }
-
-        @Override
-        public Direction turnRight() {
-            return new South();
-        }
-
-        @Override
-        public Direction turnLeft() {
-            return new North();
-        }
-
-        @Override
-        public String toString() {
-            return "E";
-        }
+    private static Direction east() {
+        return Direction.builder()
+                .id("E")
+                .forward(RoverPosition::moveEast)
+                .backward(RoverPosition::moveWest)
+                .right(Direction::south)
+                .left(Direction::north)
+                .build();
     }
 
-    private static class South extends Direction {
-
-        @Override
-        public Boolean forwards(RoverPosition position) {
-            return position.moveSouth();
-        }
-
-        @Override
-        public Boolean backwards(RoverPosition position) {
-            return position.moveNorth();
-        }
-
-        @Override
-        public Direction turnRight() {
-            return new West();
-        }
-
-        @Override
-        public Direction turnLeft() {
-            return new East();
-        }
-
-        @Override
-        public String toString() {
-            return "S";
-        }
+    private static Direction south() {
+        return Direction.builder()
+                .id("S")
+                .forward(RoverPosition::moveSouth)
+                .backward(RoverPosition::moveNorth)
+                .right(Direction::west)
+                .left(Direction::east)
+                .build();
     }
 
-    private static class West extends Direction {
-
-        @Override
-        public Boolean forwards(RoverPosition position) {
-            return position.moveWest();
-        }
-
-        @Override
-        public Boolean backwards(RoverPosition position) {
-            return position.moveEast();
-        }
-
-        @Override
-        public Direction turnRight() {
-            return new North();
-        }
-
-        @Override
-        public Direction turnLeft() {
-            return new South();
-        }
-
-        @Override
-        public String toString() {
-            return "W";
-        }
+    private static Direction west() {
+        return Direction.builder()
+                .id("W")
+                .forward(RoverPosition::moveWest)
+                .backward(RoverPosition::moveEast)
+                .right(Direction::north)
+                .left(Direction::south)
+                .build();
     }
+
+    Boolean forwards(RoverPosition position) { return forward.apply(position); }
+
+    Boolean backwards(RoverPosition position) { return backward.apply(position); }
+
+    Direction turnRight() { return right.get(); }
+
+    Direction turnLeft() { return left.get(); }
+
+    @Override
+    public String toString() { return id; }
 }
