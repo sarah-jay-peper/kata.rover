@@ -1,24 +1,23 @@
 package de.c_peper.kata.rover;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@RequiredArgsConstructor
 public class RoverArea {
 
-    private final Integer minX;
+    private final Axis axisX;
 
-    private final Integer minY;
-
-    private final Integer maxX;
-
-    private final Integer maxY;
+    private final Axis axisY;
 
     private List<Position> obstacles = new ArrayList<>();
+
+    @java.beans.ConstructorProperties({"minX", "minY", "maxX", "maxY"})
+    public RoverArea(Integer minX, Integer minY, Integer maxX, Integer maxY) {
+        axisX = new Axis(minX, maxX);
+        axisY = new Axis(minY, maxY);
+    }
 
     static RoverArea getDefaultField() {
         return new RoverArea(0, 0, 10, 10);
@@ -44,4 +43,31 @@ public class RoverArea {
         }
         return Boolean.FALSE;
     }
+
+    Integer increaseY(Integer y) {
+        return axisY.increase(y);
+    }
+
+    Integer decreaseY(Integer y) {
+        return axisY.decrease(y);
+    }
+
+    Integer increaseX(Integer x) {
+        return axisX.increase(x);
+    }
+
+    Integer decreaseX(Integer x) {
+        return axisX.decrease(x);
+    }
+}
+
+@RequiredArgsConstructor
+class Axis {
+    final Integer min;
+
+    final Integer max;
+
+    Integer increase(Integer input) { return input + 1 == max ? min : input + 1; }
+
+    Integer decrease(Integer input) { return input - 1 < min ? max - 1 : input - 1; }
 }

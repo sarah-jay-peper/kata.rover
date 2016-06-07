@@ -18,40 +18,28 @@ class RoverPosition extends Position {
     }
 
     Boolean moveNorth() {
-        Integer newY = getY() + 1;
-        if (newY.equals(field.getMaxY())) {
-            newY = field.getMinY();
-        }
+        Integer newY = field.increaseY(getY());
         if (field.hasObstacle(getX(), newY)) return Boolean.FALSE;
         setY(newY);
         return Boolean.TRUE;
     }
 
     Boolean moveWest() {
-        Integer newX = getX() - 1;
-        if (newX < field.getMinX()) {
-            newX = field.getMaxX() - 1;
-        }
+        Integer newX = field.decreaseX(getX());
         if (field.hasObstacle(newX, getY())) return Boolean.FALSE;
         setX(newX);
         return Boolean.TRUE;
     }
 
     Boolean moveEast() {
-        Integer newX = getX() + 1;
-        if (newX.equals(field.getMaxX())) {
-            newX = field.getMinX();
-        }
+        Integer newX = field.increaseX(getX());
         if (field.hasObstacle(newX, getY())) return Boolean.FALSE;
         setX(newX);
         return Boolean.TRUE;
     }
 
     Boolean moveSouth() {
-        Integer newY = getY() - 1;
-        if (newY < field.getMinY()) {
-            newY = field.getMaxY() - 1;
-        }
+        Integer newY = field.decreaseY(getY());
         if (field.hasObstacle(getX(), newY)) return Boolean.FALSE;
         setY(newY);
         return Boolean.TRUE;
