@@ -12,18 +12,16 @@ import java.util.function.Supplier;
  * L: N->W->S->E->N
  */
 public class Rover {
-
-    private RoverPosition position;
+    private final RoverPosition position;
+    private final InputActions inputAction;
 
     private Direction direction;
-
-    private InputActions inputAction;
 
     public Rover() {
         this(RoverArea.getDefaultField());
     }
 
-    public Rover(RoverArea field) {
+    private Rover(RoverArea field) {
         position = new RoverPosition(field, 0, 0);
         direction = Direction.init();
         inputAction = new InputActions();
@@ -48,7 +46,7 @@ public class Rover {
 
     private class InputActions {
 
-        private Map<Integer, Supplier<Boolean>> map = new HashMap<>();
+        private final Map<Integer, Supplier<Boolean>> map = new HashMap<>();
 
         InputActions() {
             add('R', () -> {

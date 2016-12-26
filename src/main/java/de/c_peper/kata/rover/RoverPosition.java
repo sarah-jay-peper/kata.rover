@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 class RoverPosition extends Position {
 
-    private RoverArea field;
+    private final RoverArea field;
 
     RoverPosition(RoverArea field, Integer posX, Integer posY) {
         super(posX, posY);

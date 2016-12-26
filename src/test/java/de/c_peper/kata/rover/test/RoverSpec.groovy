@@ -8,16 +8,13 @@ import spock.lang.Unroll
 class RoverSpec extends Specification {
 
     @Unroll
-    def "Basic movement: #testName"() {
+    "Basic movement: #testName"() {
         given: "new Rover"
             def rover = new Rover()
-
         when: "movement input"
             rover.move(input)
-
         then: "expect result"
             rover.getPositionString() == result
-
         where:
             input | result  | testName
             'R'   | "0,0,E" | "turn right"
@@ -27,13 +24,11 @@ class RoverSpec extends Specification {
     }
 
     @Unroll
-    def "sideways movement: #testName"() {
+    "sideways movement: #testName"() {
         given: "new Rover"
             def rover = new Rover()
-
         when: "movement input"
             rover.move(input)
-
         then: "expect result"
             rover.getPositionString() == result
 
@@ -48,7 +43,7 @@ class RoverSpec extends Specification {
     }
 
     @Unroll
-    def "north/south movement: #testName"() {
+    "north/south movement: #testName"() {
         given: "new Rover"
             def rover = new Rover()
 
@@ -75,12 +70,12 @@ class RoverSpec extends Specification {
     }
 
     @Unroll
-    def "obstacle avoidance: #testName"() {
+    "obstacle avoidance: #testName"() {
         given: "new Rover"
             def rover = new Rover()
 
         and: "obstacle"
-            rover.addObstacle(obsX, obsY);
+            rover.addObstacle(obsX, obsY)
 
         when: "movement input"
             rover.move(input)
@@ -99,19 +94,15 @@ class RoverSpec extends Specification {
     }
 
     @Unroll
-    def "obstacle avoidance, ignore extra movements: #testName"() {
+    "obstacle avoidance, ignore extra movements: #testName"() {
         given: "new Rover"
             def rover = new Rover()
-
         and: "obstacle"
-            rover.addObstacle(obsX, obsY);
-
+            rover.addObstacle(obsX, obsY)
         when: "movement input"
             rover.move(input)
-
         then: "expect result"
             rover.getPositionString() == result
-
         where:
             input    | result  | obsX | obsY | testName
             "FFF"    | "0,1,N" | 0    | 2    | "obstacle at 0/2, keep going north"
@@ -126,13 +117,11 @@ class RoverSpec extends Specification {
     }
 
     @Unroll
-    def "Different Area size: #testName"() {
+    "Different Area size: #testName"() {
         given: "new Rover"
             def rover = new Rover(RoverArea.getZeroBasedField(fieldX, fieldY))
-
         when: "movement input"
             rover.move(input)
-
         then: "expect result"
             rover.getPositionString() == result
         where:
@@ -144,13 +133,11 @@ class RoverSpec extends Specification {
     }
 
     @Unroll
-    def "negative coordinates: #testName"() {
+    "negative coordinates: #testName"() {
         given: "new Rover"
             def rover = new Rover(new RoverArea(fieldMinX, fieldMinY, 5, 5))
-
         when: "movement input"
             rover.move(input)
-
         then: "expect result"
             rover.getPositionString() == result
         where:
@@ -166,21 +153,17 @@ class RoverSpec extends Specification {
     }
 
     @Unroll
-    def "multiple obstacles to avoid at 0/2, 2/0 and 3/3 : #testName"() {
+    "multiple obstacles to avoid at 0/2, 2/0 and 3/3 : #testName"() {
         given: "new Rover"
             def rover = new Rover()
-
         and: "obstacle"
-            rover.addObstacle(0, 2);
-            rover.addObstacle(2, 0);
-            rover.addObstacle(3, 3);
-
+            rover.addObstacle(0, 2)
+            rover.addObstacle(2, 0)
+            rover.addObstacle(3, 3)
         when: "movement input"
             rover.move(input)
-
         then: "expect result"
             rover.getPositionString() == result
-
         where:
             input      | result  | testName
             "FFF"      | "0,1,N" | "hit first obstacle"

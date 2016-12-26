@@ -11,10 +11,10 @@ public class RoverArea {
 
     private final Axis axisY;
 
-    private List<Position> obstacles = new ArrayList<>();
+    private final List<Position> obstacles = new ArrayList<>();
 
     @java.beans.ConstructorProperties({"minX", "minY", "maxX", "maxY"})
-    public RoverArea(Integer minX, Integer minY, Integer maxX, Integer maxY) {
+    private RoverArea(Integer minX, Integer minY, Integer maxX, Integer maxY) {
         axisX = new Axis(minX, maxX);
         axisY = new Axis(minY, maxY);
     }
@@ -63,9 +63,9 @@ public class RoverArea {
 
 @RequiredArgsConstructor
 class Axis {
-    final Integer min;
+    private final Integer min;
 
-    final Integer max;
+    private final Integer max;
 
     Integer increase(Integer input) { return input + 1 == max ? min : input + 1; }
 
