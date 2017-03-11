@@ -5,6 +5,9 @@ import lombok.RequiredArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import static de.c_peper.kata.rover.AxisChange.DECREASE;
+import static de.c_peper.kata.rover.AxisChange.INCREASE;
+
 public class RoverArea {
     private final Axis axisX;
     private final Axis axisY;
@@ -45,19 +48,19 @@ public class RoverArea {
     }
 
     Integer increaseY(Integer y) {
-        return axisY.increase(y);
+        return axisY.change(y, INCREASE);
     }
 
     Integer decreaseY(Integer y) {
-        return axisY.decrease(y);
+        return axisY.change(y, DECREASE);
     }
 
     Integer increaseX(Integer x) {
-        return axisX.increase(x);
+        return axisX.change(x, INCREASE);
     }
 
     Integer decreaseX(Integer x) {
-        return axisX.decrease(x);
+        return axisX.change(x, DECREASE);
     }
 }
 
@@ -66,7 +69,23 @@ class Axis {
     private final Integer min;
     private final Integer max;
 
-    Integer increase(Integer input) { return input + 1 > max ? min : input + 1; }
+    Integer change(Integer input, AxisChange change) {
+        int output = input + change.amount;
+        if (output > max) {
+            return min;
+        }
+        if (output < min) {
+            return max;
+        }
+        return output;
+    }
+}
 
-    Integer decrease(Integer input) { return input - 1 < min ? max : input - 1; }
+@lombok.RequiredArgsConstructor
+enum AxisChange {
+    INCREASE(1),
+    DECREASE(-1),
+    NEUTRAL(0);
+
+    final int amount;
 }
