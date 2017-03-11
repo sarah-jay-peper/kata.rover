@@ -2,6 +2,11 @@ package de.c_peper.kata.rover;
 
 import lombok.Getter;
 
+import static de.c_peper.kata.rover.Movement.EAST;
+import static de.c_peper.kata.rover.Movement.NORTH;
+import static de.c_peper.kata.rover.Movement.SOUTH;
+import static de.c_peper.kata.rover.Movement.WEST;
+
 @Getter
 class RoverPosition extends Position {
     private final RoverArea field;
@@ -16,31 +21,30 @@ class RoverPosition extends Position {
         return x + "," + y;
     }
 
-    Boolean moveNorth() {
-        Integer newY = field.increaseY(getY());
-        if (field.hasObstacle(getX(), newY)) return Boolean.FALSE;
+    public Boolean move(Movement movement) {
+        Integer newY = field.validateY(getY() + movement.y);
+        Integer newX = field.validateX(getX() + movement.x);
+        if (field.hasObstacle(newX, newY)) {
+            return Boolean.FALSE;
+        }
         setY(newY);
-        return Boolean.TRUE;
-    }
-
-    Boolean moveWest() {
-        Integer newX = field.decreaseX(getX());
-        if (field.hasObstacle(newX, getY())) return Boolean.FALSE;
         setX(newX);
         return Boolean.TRUE;
     }
 
-    Boolean moveEast() {
-        Integer newX = field.increaseX(getX());
-        if (field.hasObstacle(newX, getY())) return Boolean.FALSE;
-        setX(newX);
-        return Boolean.TRUE;
+    public Boolean moveNorth() {
+        return move(NORTH);
     }
 
-    Boolean moveSouth() {
-        Integer newY = field.decreaseY(getY());
-        if (field.hasObstacle(getX(), newY)) return Boolean.FALSE;
-        setY(newY);
-        return Boolean.TRUE;
+    public Boolean moveWest() {
+        return move(WEST);
+    }
+
+    public Boolean moveEast() {
+        return move(EAST);
+    }
+
+    public Boolean moveSouth() {
+        return move(SOUTH);
     }
 }
