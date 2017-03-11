@@ -40,6 +40,11 @@ public class Rover {
         position.getField().addObstacle(new Position(positionX, positionY));
     }
 
+    private Boolean turn(Direction newDirection) {
+        direction = newDirection;
+        return Boolean.TRUE;
+    }
+
     private Boolean isNotSuccessful(Boolean successOfMovement) {
         return !successOfMovement;
     }
@@ -49,14 +54,8 @@ public class Rover {
         private final Map<Integer, Supplier<Boolean>> map = new HashMap<>();
 
         InputActions() {
-            add('R', () -> {
-                direction = direction.turnRight();
-                return Boolean.TRUE;
-            });
-            add('L', () -> {
-                direction = direction.turnLeft();
-                return Boolean.TRUE;
-            });
+            add('R', () -> turn(direction.turnRight()));
+            add('L', () -> turn(direction.turnLeft()));
             add('F', () -> direction.forwards(position));
             add('B', () -> direction.backwards(position));
         }
