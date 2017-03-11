@@ -6,25 +6,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoverArea {
-
     private final Axis axisX;
-
     private final Axis axisY;
-
     private final List<Position> obstacles = new ArrayList<>();
 
-    @java.beans.ConstructorProperties({"minX", "minY", "maxX", "maxY"})
     private RoverArea(Integer minX, Integer minY, Integer maxX, Integer maxY) {
         axisX = new Axis(minX, maxX);
         axisY = new Axis(minY, maxY);
     }
 
     static RoverArea getDefaultField() {
-        return new RoverArea(0, 0, 10, 10);
+        return new RoverArea(0, 0, 9, 9);
     }
 
-    public static RoverArea getZeroBasedField(Integer maxX, Integer maxY) {
-        return new RoverArea(0, 0, maxX, maxY);
+    public static RoverArea getZeroBasedFieldExclusiveUpperLimit(Integer maxX, Integer maxY) {
+        return new RoverArea(0, 0, maxX-1, maxY-1);
+    }
+
+    public static RoverArea getField(Integer minX, Integer minY, Integer maxX, Integer maxY) {
+        return new RoverArea(minX, minY, maxX, maxY);
     }
 
     void addObstacle(Position obstacle) {
@@ -64,10 +64,9 @@ public class RoverArea {
 @RequiredArgsConstructor
 class Axis {
     private final Integer min;
-
     private final Integer max;
 
-    Integer increase(Integer input) { return input + 1 == max ? min : input + 1; }
+    Integer increase(Integer input) { return input + 1 > max ? min : input + 1; }
 
-    Integer decrease(Integer input) { return input - 1 < min ? max - 1 : input - 1; }
+    Integer decrease(Integer input) { return input - 1 < min ? max : input - 1; }
 }

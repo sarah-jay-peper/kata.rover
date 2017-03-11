@@ -4,7 +4,6 @@ import lombok.Getter;
 
 @Getter
 class RoverPosition extends Position {
-
     private final RoverArea field;
 
     RoverPosition(RoverArea field, Integer posX, Integer posY) {

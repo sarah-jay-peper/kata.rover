@@ -119,7 +119,7 @@ class RoverSpec extends Specification {
     @Unroll
     "Different Area size: #testName"() {
         given: "new Rover"
-            def rover = new Rover(RoverArea.getZeroBasedField(fieldX, fieldY))
+            def rover = new Rover(RoverArea.getZeroBasedFieldExclusiveUpperLimit(fieldX, fieldY))
         when: "movement input"
             rover.move(input)
         then: "expect result"
@@ -135,20 +135,20 @@ class RoverSpec extends Specification {
     @Unroll
     "negative coordinates: #testName"() {
         given: "new Rover"
-            def rover = new Rover(new RoverArea(fieldMinX, fieldMinY, 5, 5))
+            def rover = new Rover(RoverArea.getField(fieldMinX, fieldMinY, 5, 5))
         when: "movement input"
             rover.move(input)
         then: "expect result"
             rover.getPositionString() == result
         where:
             input      | result   | fieldMinX | fieldMinY | testName
-            "FFFFFF"   | "0,-4,N" | -5        | -5        | "field: -5..5/-5..5, forward north 6"
+            "FFFFFF"   | "0,-5,N" | -5        | -5        | "field: -5..5/-5..5, forward north 6"
             "B"        | "0,-1,N" | -5        | -5        | "field: -5..5/-5..5, backward north 1"
-            "RRFFFFFF" | "0,4,S"  | -5        | -5        | "field: -5..5/-5..5, forward south 6"
+            "RRFFFFFF" | "0,5,S"  | -5        | -5        | "field: -5..5/-5..5, forward south 6"
             "RRB"      | "0,1,S"  | -5        | -5        | "field: -5..5/-5..5, backward south 1"
-            "RFFFFFF"  | "-4,0,E" | -5        | -5        | "field: -5..5/-5..5, forward east 6"
+            "RFFFFFF"  | "-5,0,E" | -5        | -5        | "field: -5..5/-5..5, forward east 6"
             "RB"       | "-1,0,E" | -5        | -5        | "field: -5..5/-5..5, backward east 1"
-            "LFFFFFF"  | "4,0,W"  | -5        | -5        | "field: -5..5/-5..5, forward west 6"
+            "LFFFFFF"  | "5,0,W"  | -5        | -5        | "field: -5..5/-5..5, forward west 6"
             "LB"       | "1,0,W"  | -5        | -5        | "field: -5..5/-5..5, backward west 1"
     }
 
