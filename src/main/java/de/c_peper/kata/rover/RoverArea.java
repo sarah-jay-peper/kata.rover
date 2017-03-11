@@ -36,12 +36,8 @@ public class RoverArea {
     }
 
     private Boolean hasObstacle(Position position) {
-        for (Position obstacle : obstacles) {
-            if (obstacle.equals(position)) {
-                return Boolean.TRUE;
-            }
-        }
-        return Boolean.FALSE;
+        return obstacles.stream()
+            .anyMatch(x -> x.equals(position));
     }
 
     Integer validateY(Integer y) {
