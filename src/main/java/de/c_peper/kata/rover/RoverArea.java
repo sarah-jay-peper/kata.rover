@@ -20,20 +20,16 @@ public class RoverArea {
     }
 
     public static RoverArea getZeroBasedFieldExclusiveUpperLimit(Integer maxX, Integer maxY) {
-        return new RoverArea(0, 0, maxX-1, maxY-1);
+        return new RoverArea(0, 0, maxX - 1, maxY - 1);
     }
 
     public static RoverArea getField(Integer minX, Integer minY, Integer maxX, Integer maxY) {
         return new RoverArea(minX, minY, maxX, maxY);
     }
 
-    void addObstacle(Position obstacle) {
-        obstacles.add(obstacle);
-    }
+    void addObstacle(Position obstacle) { obstacles.add(obstacle); }
 
-    Boolean hasObstacle(Integer x, Integer y) {
-        return hasObstacle(new Position(x, y));
-    }
+    Boolean hasObstacle(Integer x, Integer y) { return hasObstacle(new Position(x, y)); }
 
     private Boolean hasObstacle(Position position) {
         return obstacles.stream()
@@ -55,12 +51,8 @@ class Axis {
     private final Integer max;
 
     Integer validate(Integer input) {
-        if (input > max) {
-            return min;
-        }
-        if (input < min) {
-            return max;
-        }
+        if (input > max) return min;
+        if (input < min) return max;
         return input;
     }
 }
